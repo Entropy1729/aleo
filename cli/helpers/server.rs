@@ -1,9 +1,10 @@
 use crate::helpers::Ledger;
-use snarkvm::prelude::{Field, GraphKey, Network, RecordsFilter, Transaction, ViewKey};
+use snarkvm::{prelude::{Field, GraphKey, Network, RecordsFilter, Transaction, ViewKey}, circuit::view_key};
 
 use anyhow::Result;
 use core::marker::PhantomData;
 use indexmap::IndexMap;
+use serde::{Deserialize, Serialize};
 use std::sync::Arc;
 use tokio::{sync::mpsc, task::JoinHandle};
 use warp::{http::StatusCode, reject, reply, Filter, Rejection, Reply};
@@ -38,6 +39,12 @@ fn with<T: Clone + Send>(item: T) -> impl Filter<Extract = (T,), Error = std::co
 pub type LedgerSender<N> = mpsc::Sender<LedgerRequest<N>>;
 /// Shorthand for the child half of the `Ledger` message channel.
 pub type LedgerReceiver<N> = mpsc::Receiver<LedgerRequest<N>>;
+
+#[derive(Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct ViewKeyModel<N: Network> {
+    pub view_key: ViewKey<N>
+}
 
 /// An enum of requests that the `Ledger` struct processes.
 #[derive(Debug)]
@@ -98,7 +105,7 @@ impl<N: Network> Server<N> {
             .and_then(Self::state_path);
 
         // GET /testnet3/records/all
-        let records_all = warp::get()
+        let records_all = warp::post()
             .and(warp::path!("testnet3" / "records" / "all"))
             .and(warp::body::content_length_limit(256))
             .and(warp::body::json())
@@ -106,7 +113,7 @@ impl<N: Network> Server<N> {
             .and_then(Self::records_all);
 
         // GET /testnet3/records/spent
-        let records_spent = warp::get()
+        let records_spent = warp::post()
             .and(warp::path!("testnet3" / "records" / "spent"))
             .and(warp::body::content_length_limit(256))
             .and(warp::body::json())
@@ -114,7 +121,7 @@ impl<N: Network> Server<N> {
             .and_then(Self::records_spent);
 
         // GET /testnet3/records/unspent
-        let records_unspent = warp::get()
+        let records_unspent = warp::post()
             .and(warp::path!("testnet3" / "records" / "unspent"))
             .and(warp::body::content_length_limit(128))
             .and(warp::body::json())
@@ -217,7 +224,8 @@ impl<N: Network> Server<N> {
     }
 
     /// Returns all of the records for the given view key.
-    async fn records_all(view_key: ViewKey<N>, ledger: Arc<Ledger<N>>) -> Result<impl Reply, Rejection> {
+    async fn records_all(view_key_model: ViewKeyModel<N>, ledger: Arc<Ledger<N>>) -> Result<impl Reply, Rejection> {
+        let view_key = view_key_model.view_key;
         // Fetch the records using the view key.
         let records: IndexMap<_, _> = ledger
             .ledger
