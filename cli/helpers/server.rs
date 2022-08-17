@@ -1,5 +1,5 @@
 use crate::helpers::Ledger;
-use snarkvm::prelude::{Field, Network, RecordsFilter, Transaction, ViewKey};
+use snarkvm::prelude::{Field, Network, RecordsFilter, Transaction, ViewKey, Address};
 
 use anyhow::Result;
 use core::marker::PhantomData;
@@ -7,6 +7,7 @@ use indexmap::IndexMap;
 use std::sync::Arc;
 use tokio::{sync::mpsc, task::JoinHandle};
 use warp::{http::StatusCode, reject, reply, Filter, Rejection, Reply};
+use serde::{Deserialize, Serialize};
 
 /// An enum of error handlers for the server.
 #[derive(Debug)]
@@ -45,6 +46,7 @@ pub enum LedgerRequest<N: Network> {
     TransactionBroadcast(Transaction<N>),
 }
 
+
 /// A server for the ledger.
 #[allow(dead_code)]
 #[derive(Debug)]
@@ -59,7 +61,16 @@ pub struct Server<N: Network> {
     _phantom: PhantomData<N>,
 }
 
+#[derive(Serialize, Deserialize)]
+struct TransferRequest<'a, N: Network> {
+    pub to:  &'a Address<N>,
+    pub amount: u64
+}
+
+
 impl<N: Network> Server<N> {
+
+
     /// Initializes a new instance of the server.
     pub fn start(ledger: Arc<Ledger<N>>) -> Result<Self> {
         // Initialize a runtime.
@@ -123,6 +134,8 @@ impl<N: Network> Server<N> {
         })
     }
 
+
+
     /// Initializes the routes, given the ledger sender.
     fn routes(
         ledger: Arc<Ledger<N>>,
@@ -184,6 +197,14 @@ impl<N: Network> Server<N> {
             .and(with(ledger))
             .and_then(Self::records_unspent);
 
+        // POST /testnet3/transfer
+        let transfer = warp::post()
+            .and(warp::path!("testnet3" / "transfer"))
+            .and(warp::body::content_length_limit(10 * 1024 * 1024))
+            .and(warp::body::json())
+            .and(with(ledger))
+            .and_then(Self::transfer);
+
         // POST /testnet3/transaction/broadcast
         let transaction_broadcast = warp::post()
             .and(warp::path!("testnet3" / "transaction" / "broadcast"))
@@ -201,6 +222,7 @@ impl<N: Network> Server<N> {
             .or(records_all)
             .or(records_spent)
             .or(records_unspent)
+            .or(transfer)
             .or(transaction_broadcast)
     }
 }
@@ -270,6 +292,14 @@ impl<N: Network> Server<N> {
             .collect::<IndexMap<_, _>>();
         // Return the records.
         Ok(reply::with_status(reply::json(&records), StatusCode::OK))
+    }
+
+    /// Returns the unspent records for the given view key.
+    async fn transfer(transfer_request: TransferRequest<N>, ledger: Arc<Ledger<N>>) -> Result<impl Reply, Rejection> {
+        // Fetch the records using the view key.
+        let transaction = ledger.create_transfer(transfer_request.to, transfer_request.amount);
+        // Return the records.
+        Ok(reply::with_status(reply::json(&transaction), StatusCode::OK))
     }
 
     /// Broadcasts the transaction to the ledger.
