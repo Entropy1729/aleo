@@ -1,12 +1,13 @@
 use crate::helpers::Ledger;
-use snarkvm::prelude::{Field, Network, RecordsFilter, Transaction, ViewKey};
-
+use snarkvm::prelude::{Field, Network, RecordsFilter, Transaction, ViewKey, Address};
+use serde::{Deserialize, Serialize};
 use anyhow::Result;
 use core::marker::PhantomData;
 use indexmap::IndexMap;
 use std::sync::Arc;
 use tokio::{sync::mpsc, task::JoinHandle};
 use warp::{http::StatusCode, reject, reply, Filter, Rejection, Reply};
+use std::str::FromStr;
 
 /// An enum of error handlers for the server.
 #[derive(Debug)]
@@ -27,6 +28,12 @@ impl<T> OrReject<T> for anyhow::Result<T> {
     fn or_reject(self) -> Result<T, Rejection> {
         self.map_err(|e| reject::custom(ServerError::Request(e.to_string())))
     }
+}
+
+#[derive(Serialize, Deserialize)]
+struct TransferRequest {
+    pub to: String,
+    pub amount: u64,
 }
 
 /// A middleware to include the given item in the handler.
@@ -181,8 +188,17 @@ impl<N: Network> Server<N> {
             .and(warp::path!("testnet3" / "records" / "unspent"))
             .and(warp::body::content_length_limit(128))
             .and(warp::body::json())
-            .and(with(ledger))
+            .and(with(ledger.clone()))
             .and_then(Self::records_unspent);
+
+        // POST /testnet3/transfer
+        let transfer = warp::post()
+            .and(warp::path!("testnet3" / "transfer"))
+            .and(warp::body::content_length_limit(10 * 1024 * 1024))
+            .and(warp::body::json())
+            .and(with(ledger))
+            .and(with(ledger_sender.clone()))
+            .and_then(Self::transfer);
 
         // POST /testnet3/transaction/broadcast
         let transaction_broadcast = warp::post()
@@ -201,6 +217,7 @@ impl<N: Network> Server<N> {
             .or(records_all)
             .or(records_spent)
             .or(records_unspent)
+            .or(transfer)
             .or(transaction_broadcast)
     }
 }
@@ -270,6 +287,21 @@ impl<N: Network> Server<N> {
             .collect::<IndexMap<_, _>>();
         // Return the records.
         Ok(reply::with_status(reply::json(&records), StatusCode::OK))
+    }
+
+    /// Returns the unspent records for the given view key.
+    async fn transfer(
+        transfer_request: TransferRequest,
+        ledger: Arc<Ledger<N>>,
+        ledger_sender: LedgerSender<N>,
+    ) -> Result<impl Reply, Rejection> {
+        match Address::<N>::from_str(&transfer_request.to) {
+            Ok(address) => match ledger.create_transfer(&address, transfer_request.amount) {
+                Ok(transaction) => Self::transaction_broadcast(transaction.clone(), ledger_sender).await,
+                Err(error) => Err(reject::custom(ServerError::Request(format!("{error}")))),
+            },
+            Err(error) => Err(reject::custom(ServerError::Request(format!("{error}")))),
+        }
     }
 
     /// Broadcasts the transaction to the ledger.
