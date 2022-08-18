@@ -113,7 +113,7 @@ A `number` representing the height of the latest block.
 #### Example Request
 
 ```
-curl --location --request -GET 'localhost/testnet3/latest/height'
+curl --location --request -GET 'localhost:4180/testnet3/latest/height'
 ```
 
 #### Example Response
@@ -162,7 +162,7 @@ canonical chain.
 #### Example Request
 
 ```
-curl --location --request -GET 'localhost/testnet3/blocks/0'
+curl --location --request -GET 'localhost:4180/testnet3/block/0'
 ```
 
 The height must be an integer from 0 to 4,294,967,295 representing the height
@@ -251,7 +251,7 @@ TODO
 
 ### Records 
 
-#### Records all
+#### Records all (WIP)
 
 Returns all the records in the ledger owned by a user using its view key.
 
@@ -259,9 +259,9 @@ Returns all the records in the ledger owned by a user using its view key.
 
 |     Parameter      |  Type  |               Description                |
 |:------------------:|:------:|:----------------------------------------:|
-|   `TODO`  | object |    TODO     |
+|   `commitment`  | object |    TODO     |
 
-**Record ID?**
+**Commitment**
 
 |  Parameter   | Type | Description |
 |:--------:|:--------:|:---------:|
@@ -293,9 +293,9 @@ Returns all the unspent records in the ledger owned by a user using its view key
 
 |     Parameter      |  Type  |               Description                |
 |:------------------:|:------:|:----------------------------------------:|
-|   `TODO`  | object |    TODO     |
+|   `Commitment`  | object |    TODO     |
 
-**Record ID?**
+**Commitment**
 
 |  Parameter   | Type | Description |
 |:--------:|:--------:|:---------:|
@@ -317,6 +317,37 @@ Returns all the unspent records in the ledger owned by a user using its view key
     }
 ```
 
+#### Spent Records (WIP)
+
+Returns all the spent records in the ledger owned by a user using its view key.
+
+#### Response 
+
+|     Parameter      |  Type  |               Description                |
+|:------------------:|:------:|:----------------------------------------:|
+|   `Commitment`  | object |    TODO     |
+
+**Commitment**
+
+|  Parameter   | Type | Description |
+|:--------:|:--------:|:---------:|
+|   `owner`  | aleo.group |   Aleo address that owns the record |
+|  `gates`   |   u64 | Amount of credits that the record has to spend |
+| `_nonce`   | aleo.group | TODO |
+
+#### Example Request
+
+`curl --location --request GET '127.0.0.1:4180/testnet3/records/spent' -H 'Content-Type: application/json' -d '"AViewKey1cwUx7j4YYPnwibMhRTQZkKs4HdEV47pFHQJcAkUMXNcF"'`
+
+#### Example Response
+
+```json
+    "2153026124620299619462017161096869829711340257093989086312824624175512204608field": {
+        owner: aleo136wkcln0pfushrsh4229l292ynyvx7pdlc8jjjahuh7kkxjsaugqf6q3x7.private, 
+        gates: 1100000000000000u64.private,
+        _nonce: 4185076965400754321519878699721977553075640289664060898195995911364718580243group.public
+    }
+```
 ### Transaction Broadcast
 
 TODO
