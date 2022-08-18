@@ -16,22 +16,8 @@
 
 use crate::helpers::Server;
 use snarkvm::prelude::{
-    Address,
-    Block,
-    BlockMemory,
-    Identifier,
-    Network,
-    PrivateKey,
-    Program,
-    ProgramID,
-    ProgramMemory,
-    ProgramStore,
-    RecordsFilter,
-    Transaction,
-    Value,
-    ViewKey,
-    Zero,
-    VM,
+    Address, Block, BlockMemory, Identifier, Network, PrivateKey, Program, ProgramID, ProgramMemory, ProgramStore,
+    RecordsFilter, Transaction, Value, ViewKey, Zero, VM,
 };
 
 use anyhow::{anyhow, bail, ensure, Result};
@@ -155,7 +141,7 @@ impl<N: Network> Ledger<N> {
             .read()
             .find_records(&self.view_key, RecordsFilter::Unspent)?
             .filter(|(_, record)| !record.gates().is_zero())
-            .min_by(|(_, a), (_, b)| (**a.gates()).cmp(&**b.gates()));
+            .max_by(|(_, a), (_, b)| (**a.gates()).cmp(&**b.gates()));
 
         // Prepare the record.
         let record = match record {
