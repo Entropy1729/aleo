@@ -152,32 +152,32 @@ impl<N: Network> Server<N> {
             .and(with(ledger.clone()))
             .and_then(Self::get_block);
 
-        // GET /testnet3/statePath/{commitment}
-        let state_path = warp::get()
+        // POST /testnet3/statePath
+        let state_path = warp::post()
             .and(warp::path!("testnet3" / "statePath"))
             .and(warp::body::content_length_limit(128))
             .and(warp::body::json())
             .and(with(ledger.clone()))
             .and_then(Self::state_path);
 
-        // GET /testnet3/records/all
-        let records_all = warp::get()
+        // POST /testnet3/records/all
+        let records_all = warp::post()
             .and(warp::path!("testnet3" / "records" / "all"))
             .and(warp::body::content_length_limit(256))
             .and(warp::body::json())
             .and(with(ledger.clone()))
             .and_then(Self::records_all);
 
-        // GET /testnet3/records/spent
-        let records_spent = warp::get()
+        // POST /testnet3/records/spent
+        let records_spent = warp::post()
             .and(warp::path!("testnet3" / "records" / "spent"))
             .and(warp::body::content_length_limit(256))
             .and(warp::body::json())
             .and(with(ledger.clone()))
             .and_then(Self::records_spent);
 
-        // GET /testnet3/records/unspent
-        let records_unspent = warp::get()
+        // POST /testnet3/records/unspent
+        let records_unspent = warp::post()
             .and(warp::path!("testnet3" / "records" / "unspent"))
             .and(warp::body::content_length_limit(128))
             .and(warp::body::json())
