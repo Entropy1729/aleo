@@ -1,13 +1,13 @@
 use crate::helpers::Ledger;
-use snarkvm::prelude::{Field, Network, RecordsFilter, Transaction, ViewKey, Address};
-use serde::{Deserialize, Serialize};
 use anyhow::Result;
 use core::marker::PhantomData;
 use indexmap::IndexMap;
+use serde::{Deserialize, Serialize};
+use snarkvm::prelude::{Address, Field, Network, PrivateKey, RecordsFilter, Transaction, ViewKey};
+use std::str::FromStr;
 use std::sync::Arc;
 use tokio::{sync::mpsc, task::JoinHandle};
 use warp::{http::StatusCode, reject, reply, Filter, Rejection, Reply};
-use std::str::FromStr;
 
 /// An enum of error handlers for the server.
 #[derive(Debug)]
@@ -29,10 +29,10 @@ impl<T> OrReject<T> for anyhow::Result<T> {
         self.map_err(|e| reject::custom(ServerError::Request(e.to_string())))
     }
 }
-
 #[derive(Serialize, Deserialize)]
 struct TransferRequest {
     pub to: String,
+    pub pk_sender: String,
     pub amount: u64,
 }
 
@@ -196,7 +196,7 @@ impl<N: Network> Server<N> {
             .and(warp::path!("testnet3" / "transfer"))
             .and(warp::body::content_length_limit(10 * 1024 * 1024))
             .and(warp::body::json())
-            .and(with(ledger))
+            .and(with(ledger.clone()))
             .and(with(ledger_sender.clone()))
             .and_then(Self::transfer);
 
@@ -289,19 +289,18 @@ impl<N: Network> Server<N> {
         Ok(reply::with_status(reply::json(&records), StatusCode::OK))
     }
 
-    /// Returns the unspent records for the given view key.
     async fn transfer(
         transfer_request: TransferRequest,
         ledger: Arc<Ledger<N>>,
         ledger_sender: LedgerSender<N>,
     ) -> Result<impl Reply, Rejection> {
-        match Address::<N>::from_str(&transfer_request.to) {
-            Ok(address) => match ledger.create_transfer(&address, transfer_request.amount) {
-                Ok(transaction) => Self::transaction_broadcast(transaction.clone(), ledger_sender).await,
-                Err(error) => Err(reject::custom(ServerError::Request(format!("{error}")))),
-            },
-            Err(error) => Err(reject::custom(ServerError::Request(format!("{error}")))),
-        }
+        let send_reject = |error| reject::custom(ServerError::Request(format!("{error}")));
+        let address = Address::<N>::from_str(&transfer_request.to).map_err(send_reject)?;
+        let pk_sender = PrivateKey::<N>::from_str(&transfer_request.pk_sender).map_err(send_reject)?;
+        let transaction = ledger
+            .create_transfer_test(&pk_sender, &address, transfer_request.amount)
+            .map_err(send_reject)?;
+        Self::transaction_broadcast(transaction.clone(), ledger_sender).await
     }
 
     /// Broadcasts the transaction to the ledger.
