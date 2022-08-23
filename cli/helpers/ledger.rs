@@ -178,4 +178,44 @@ impl<N: Network> Ledger<N> {
             &mut rand::thread_rng(),
         )
     }
+
+    pub fn create_transfer_test(
+        &self,
+        private_key: &PrivateKey<N>,
+        to: &Address<N>,
+        amount: u64,
+    ) -> Result<Transaction<N>> {
+        let view_key = ViewKey::try_from(private_key)?;
+
+        // Fetch the unspent record with the least gates.
+        let record = self
+            .ledger
+            .read()
+            .find_records(&view_key, RecordsFilter::Unspent)?
+            .filter(|(_, record)| !record.gates().is_zero())
+            .max_by(|(_, a), (_, b)| (**a.gates()).cmp(&**b.gates()));
+
+        println!("{:?}", record);
+
+        // Prepare the record.
+        let record = match record {
+            Some((_, record)) => record,
+            None => bail!("The Aleo account has no records to spend."),
+        };
+
+        // Create a new transaction.
+        Transaction::execute(
+            self.ledger.read().vm(),
+            private_key,
+            &ProgramID::from_str("credits.aleo")?,
+            Identifier::from_str("transfer")?,
+            &[
+                Value::Record(record),
+                Value::from_str(&format!("{to}"))?,
+                Value::from_str(&format!("{amount}u64"))?,
+            ],
+            None,
+            &mut rand::thread_rng(),
+        )
+    }
 }
