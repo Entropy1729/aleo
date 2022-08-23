@@ -16,8 +16,22 @@
 
 use crate::helpers::Server;
 use snarkvm::prelude::{
-    Address, Block, BlockMemory, Identifier, Network, PrivateKey, Program, ProgramID, ProgramMemory, ProgramStore,
-    RecordsFilter, Transaction, Value, ViewKey, Zero, VM,
+    Address,
+    Block,
+    BlockMemory,
+    Identifier,
+    Network,
+    PrivateKey,
+    Program,
+    ProgramID,
+    ProgramMemory,
+    ProgramStore,
+    RecordsFilter,
+    Transaction,
+    Value,
+    ViewKey,
+    Zero,
+    VM,
 };
 
 use anyhow::{anyhow, bail, ensure, Result};
@@ -165,7 +179,12 @@ impl<N: Network> Ledger<N> {
         )
     }
 
-    pub fn create_transfer_test(&self, private_key: &PrivateKey<N>,to: &Address<N>, amount: u64) -> Result<Transaction<N>> {
+    pub fn create_transfer_test(
+        &self,
+        private_key: &PrivateKey<N>,
+        to: &Address<N>,
+        amount: u64,
+    ) -> Result<Transaction<N>> {
         let view_key = ViewKey::try_from(private_key)?;
 
         // Fetch the unspent record with the least gates.
@@ -200,4 +219,3 @@ impl<N: Network> Ledger<N> {
         )
     }
 }
-

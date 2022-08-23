@@ -4,8 +4,7 @@ use core::marker::PhantomData;
 use indexmap::IndexMap;
 use serde::{Deserialize, Serialize};
 use snarkvm::prelude::{Address, Field, Network, PrivateKey, RecordsFilter, Transaction, ViewKey};
-use std::str::FromStr;
-use std::sync::Arc;
+use std::{str::FromStr, sync::Arc};
 use tokio::{sync::mpsc, task::JoinHandle};
 use warp::{http::StatusCode, reject, reply, Filter, Rejection, Reply};
 
@@ -196,7 +195,7 @@ impl<N: Network> Server<N> {
             .and(warp::path!("testnet3" / "transfer"))
             .and(warp::body::content_length_limit(10 * 1024 * 1024))
             .and(warp::body::json())
-            .and(with(ledger.clone()))
+            .and(with(ledger))
             .and(with(ledger_sender.clone()))
             .and_then(Self::transfer);
 
