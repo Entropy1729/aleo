@@ -62,7 +62,7 @@ impl Execute {
         self.inputs.into_iter().try_for_each(|input| {
             if input.to_string().ends_with("field") {
                 let ciphertext: Record<Network, Ciphertext<Network>> =
-                    ureq::get(&format!("http://localhost/testnet3/ciphertext/{input}"))
+                    ureq::get(&format!("http://localhost/testnet3/record/ciphertext/{input}"))
                         .call()?
                         .into_json()?;
                 let record = ciphertext.decrypt(&view_key)?;
