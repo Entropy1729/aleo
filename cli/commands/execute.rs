@@ -93,6 +93,7 @@ impl Execute {
             )?;
 
             // Print the transaction id.
+            println!();
             println!(
                 "{}",
                 format!("Transaction ID: {}", execution.id().to_string().bright_green())
