@@ -20,8 +20,8 @@ harness = false
 # git = "https://github.com/AleoHQ/snarkVM.git"
 # rev = "69cf3bd"
 git = "https://github.com/Entropy1729/snarkVM.git"
-branch = "ciphertexts_unspent_endpoint"
-features = ["parallel"]
+branch = "wasm_transfer_function"
+features = ["circuit", "parallel"]
 
 [dev-dependencies.rand]
 version = "0.8.0"
