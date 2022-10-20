@@ -14,8 +14,35 @@
 // You should have received a copy of the GNU General Public License
 // along with the Aleo library. If not, see <https://www.gnu.org/licenses/>.
 
-pub mod ledger;
-pub use ledger::*;
+use aleo_account::Record as RecordNative;
 
-pub mod updater;
-pub use updater::*;
+use core::str::FromStr;
+use wasm_bindgen::prelude::*;
+
+#[wasm_bindgen]
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct Record(RecordNative);
+
+#[wasm_bindgen]
+impl Record {
+    pub fn from_string(record: &str) -> Self {
+        Self::from_str(record).unwrap()
+    }
+
+    #[allow(clippy::inherent_to_string)]
+    pub fn to_string(&self) -> String {
+        self.0.to_string()
+    }
+
+    pub fn gates(&self) -> String {
+        self.0.gates().to_string()
+    }
+}
+
+impl FromStr for Record {
+    type Err = anyhow::Error;
+
+    fn from_str(plaintext: &str) -> Result<Self, Self::Err> {
+        Ok(Self(RecordNative::from_str(plaintext)?))
+    }
+}
