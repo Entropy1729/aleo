@@ -19,5 +19,8 @@
 pub mod account;
 pub use account::*;
 
+pub mod credits;
+pub use credits::*;
+
 #[cfg(test)]
 pub mod tests;

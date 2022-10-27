@@ -17,8 +17,9 @@ path = "benches/account.rs"
 harness = false
 
 [dependencies.snarkvm-wasm]
+# path = "../../../snarkVM_entropy/wasm"
 git = "https://github.com/Entropy1729/snarkVM.git"
-branch = "deploy_command"
+branch = "wasm_transfer_function"
 # git = "https://github.com/AleoHQ/snarkVM.git"
 # rev = "4045a57"
 features = ["parallel"]
