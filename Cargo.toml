@@ -64,7 +64,8 @@ version = "1"
 [dependencies.snarkvm]
 # path = "../snarkVM_entropy"
 git = "https://github.com/Entropy1729/snarkVM.git"
-branch = "deploy_command"
+branch = "wasm_transfer_function"
+# git = "https://github.com/AleoHQ/snarkVM.git"
 # rev = "69cf3bd"
 features = ["aleo-cli", "circuit", "console", "parallel", "rest"]
 

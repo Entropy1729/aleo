@@ -37,11 +37,11 @@ dependencies = [
  "colored",
  "indexmap",
  "once_cell",
- "parking_lot",
+ "parking_lot 0.12.1",
  "rand",
  "rand_chacha",
  "rusty-hook",
- "self_update 0.32.0",
+ "self_update",
  "serde",
  "serde_json",
  "snarkvm",
@@ -64,9 +64,9 @@ dependencies = [
 
 [[package]]
 name = "aleo-std"
-version = "0.1.14"
+version = "0.1.15"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6613c3c045767658f6cc0f5356414ca7814fb936df9197367914e5809e24622a"
+checksum = "a3a0b63a4bc771020ff7522ca7458b60ac30e8e71a6e1382765b94b1a278b78d"
 dependencies = [
  "aleo-std-cpu",
  "aleo-std-profiler",
@@ -615,6 +615,20 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c1fd087255f739f4f1aeea69f11b72f8080e9c2e7645cd06955dad4a178a49e3"
 
 [[package]]
+name = "futures"
+version = "0.3.25"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "38390104763dc37a5145a53c29c63c1290b5d316d6086ec32c293f6736051bb0"
+dependencies = [
+ "futures-channel",
+ "futures-core",
+ "futures-io",
+ "futures-sink",
+ "futures-task",
+ "futures-util",
+]
+
+[[package]]
 name = "futures-channel"
 version = "0.3.25"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -890,6 +904,9 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7a5bbe824c507c5da5956355e86a746d82e0e1464f65d862cc5e71da70e94b2c"
 dependencies = [
  "cfg-if",
+ "js-sys",
+ "wasm-bindgen",
+ "web-sys",
 ]
 
 [[package]]
@@ -1200,12 +1217,37 @@ checksum = "9ff7415e9ae3fff1225851df9e0d9e4e5479f947619774677a63572e55e80eff"
 
 [[package]]
 name = "parking_lot"
+version = "0.11.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7d17b78036a60663b797adeaee46f5c9dfebb86948d1255007a1d6be0271ff99"
+dependencies = [
+ "instant",
+ "lock_api",
+ "parking_lot_core 0.8.5",
+]
+
+[[package]]
+name = "parking_lot"
 version = "0.12.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3742b2c103b9f06bc9fff0a37ff4912935851bee6d36f3c02bcc755bcfec228f"
 dependencies = [
  "lock_api",
- "parking_lot_core",
+ "parking_lot_core 0.9.4",
+]
+
+[[package]]
+name = "parking_lot_core"
+version = "0.8.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d76e8e1493bcac0d2766c42737f34458f1c8c50c0d23bcb24ea953affb273216"
+dependencies = [
+ "cfg-if",
+ "instant",
+ "libc",
+ "redox_syscall",
+ "smallvec",
+ "winapi",
 ]
 
 [[package]]
@@ -1505,6 +1547,44 @@ dependencies = [
 ]
 
 [[package]]
+name = "reqwest-wasm"
+version = "0.11.15"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "edcfece293ee15aa8593168a28d11cd62ebef4fa9f03a035fcb9fc1cf1f1488f"
+dependencies = [
+ "base64",
+ "bytes",
+ "encoding_rs",
+ "futures",
+ "futures-core",
+ "futures-util",
+ "h2",
+ "http",
+ "http-body",
+ "hyper",
+ "hyper-tls",
+ "ipnet",
+ "js-sys",
+ "log",
+ "mime",
+ "native-tls",
+ "once_cell",
+ "percent-encoding",
+ "pin-project-lite",
+ "serde",
+ "serde_json",
+ "serde_urlencoded",
+ "tokio",
+ "tokio-native-tls",
+ "tower-service",
+ "url",
+ "wasm-bindgen",
+ "wasm-bindgen-futures",
+ "web-sys",
+ "winreg",
+]
+
+[[package]]
 name = "ring"
 version = "0.16.20"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1624,8 +1704,11 @@ dependencies = [
  "getrandom",
  "hex",
  "rand",
+ "reqwest-wasm",
+ "serde",
  "serde_json",
  "wasm-bindgen",
+ "wasm-bindgen-futures",
  "wasm-bindgen-test",
 ]
 
@@ -1650,23 +1733,6 @@ checksum = "0160a13a177a45bfb43ce71c01580998474f556ad854dcbca936dd2841a5c556"
 dependencies = [
  "core-foundation-sys",
  "libc",
-]
-
-[[package]]
-name = "self_update"
-version = "0.31.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b05ab948d728a6439b9da58a94c9df77d421a8bf558145681f908e170232f120"
-dependencies = [
- "hyper",
- "indicatif",
- "log",
- "quick-xml",
- "regex",
- "reqwest",
- "semver",
- "serde_json",
- "tempfile",
 ]
 
 [[package]]
@@ -1786,18 +1852,19 @@ checksum = "a507befe795404456341dfab10cef66ead4c041f62b8b11bbb92bffe5d0953e0"
 [[package]]
 name = "snarkvm"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git?branch=deploy_command#fa212e2879ef83f0c20237a16b2fd4e4b724da40"
+source = "git+https://github.com/Entropy1729/snarkVM.git?branch=wasm_transfer_function#6f9f5fa0c19dcfe5f17526e8dea18c65b1a22bd6"
 dependencies = [
  "anyhow",
  "clap",
  "colored",
  "indexmap",
  "once_cell",
- "parking_lot",
+ "parking_lot 0.12.1",
  "rand",
  "rayon",
- "self_update 0.31.0",
+ "self_update",
  "serde_json",
+ "snarkvm-algorithms",
  "snarkvm-circuit",
  "snarkvm-compiler",
  "snarkvm-console",
@@ -1813,14 +1880,14 @@ dependencies = [
 [[package]]
 name = "snarkvm-algorithms"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git?branch=deploy_command#fa212e2879ef83f0c20237a16b2fd4e4b724da40"
+source = "git+https://github.com/Entropy1729/snarkVM.git?branch=wasm_transfer_function#6f9f5fa0c19dcfe5f17526e8dea18c65b1a22bd6"
 dependencies = [
  "aleo-std",
  "anyhow",
  "hashbrown",
  "hex",
  "itertools",
- "parking_lot",
+ "parking_lot 0.12.1",
  "rand",
  "rand_chacha",
  "rand_core",
@@ -1839,7 +1906,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git?branch=deploy_command#fa212e2879ef83f0c20237a16b2fd4e4b724da40"
+source = "git+https://github.com/Entropy1729/snarkVM.git?branch=wasm_transfer_function#6f9f5fa0c19dcfe5f17526e8dea18c65b1a22bd6"
 dependencies = [
  "snarkvm-circuit-account",
  "snarkvm-circuit-algorithms",
@@ -1853,7 +1920,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit-account"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git?branch=deploy_command#fa212e2879ef83f0c20237a16b2fd4e4b724da40"
+source = "git+https://github.com/Entropy1729/snarkVM.git?branch=wasm_transfer_function#6f9f5fa0c19dcfe5f17526e8dea18c65b1a22bd6"
 dependencies = [
  "snarkvm-circuit-algorithms",
  "snarkvm-circuit-network",
@@ -1864,7 +1931,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit-algorithms"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git?branch=deploy_command#fa212e2879ef83f0c20237a16b2fd4e4b724da40"
+source = "git+https://github.com/Entropy1729/snarkVM.git?branch=wasm_transfer_function#6f9f5fa0c19dcfe5f17526e8dea18c65b1a22bd6"
 dependencies = [
  "snarkvm-circuit-types",
  "snarkvm-console-algorithms",
@@ -1874,7 +1941,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit-collections"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git?branch=deploy_command#fa212e2879ef83f0c20237a16b2fd4e4b724da40"
+source = "git+https://github.com/Entropy1729/snarkVM.git?branch=wasm_transfer_function#6f9f5fa0c19dcfe5f17526e8dea18c65b1a22bd6"
 dependencies = [
  "snarkvm-circuit-algorithms",
  "snarkvm-circuit-types",
@@ -1884,7 +1951,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit-environment"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git?branch=deploy_command#fa212e2879ef83f0c20237a16b2fd4e4b724da40"
+source = "git+https://github.com/Entropy1729/snarkVM.git?branch=wasm_transfer_function#6f9f5fa0c19dcfe5f17526e8dea18c65b1a22bd6"
 dependencies = [
  "indexmap",
  "itertools",
@@ -1902,12 +1969,12 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit-environment-witness"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git?branch=deploy_command#fa212e2879ef83f0c20237a16b2fd4e4b724da40"
+source = "git+https://github.com/Entropy1729/snarkVM.git?branch=wasm_transfer_function#6f9f5fa0c19dcfe5f17526e8dea18c65b1a22bd6"
 
 [[package]]
 name = "snarkvm-circuit-network"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git?branch=deploy_command#fa212e2879ef83f0c20237a16b2fd4e4b724da40"
+source = "git+https://github.com/Entropy1729/snarkVM.git?branch=wasm_transfer_function#6f9f5fa0c19dcfe5f17526e8dea18c65b1a22bd6"
 dependencies = [
  "snarkvm-circuit-algorithms",
  "snarkvm-circuit-collections",
@@ -1918,7 +1985,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit-program"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git?branch=deploy_command#fa212e2879ef83f0c20237a16b2fd4e4b724da40"
+source = "git+https://github.com/Entropy1729/snarkVM.git?branch=wasm_transfer_function#6f9f5fa0c19dcfe5f17526e8dea18c65b1a22bd6"
 dependencies = [
  "snarkvm-circuit-account",
  "snarkvm-circuit-network",
@@ -1930,7 +1997,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit-types"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git?branch=deploy_command#fa212e2879ef83f0c20237a16b2fd4e4b724da40"
+source = "git+https://github.com/Entropy1729/snarkVM.git?branch=wasm_transfer_function#6f9f5fa0c19dcfe5f17526e8dea18c65b1a22bd6"
 dependencies = [
  "snarkvm-circuit-environment",
  "snarkvm-circuit-types-address",
@@ -1945,7 +2012,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit-types-address"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git?branch=deploy_command#fa212e2879ef83f0c20237a16b2fd4e4b724da40"
+source = "git+https://github.com/Entropy1729/snarkVM.git?branch=wasm_transfer_function#6f9f5fa0c19dcfe5f17526e8dea18c65b1a22bd6"
 dependencies = [
  "snarkvm-circuit-environment",
  "snarkvm-circuit-types-boolean",
@@ -1958,7 +2025,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit-types-boolean"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git?branch=deploy_command#fa212e2879ef83f0c20237a16b2fd4e4b724da40"
+source = "git+https://github.com/Entropy1729/snarkVM.git?branch=wasm_transfer_function#6f9f5fa0c19dcfe5f17526e8dea18c65b1a22bd6"
 dependencies = [
  "snarkvm-circuit-environment",
  "snarkvm-console-types-boolean",
@@ -1967,7 +2034,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit-types-field"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git?branch=deploy_command#fa212e2879ef83f0c20237a16b2fd4e4b724da40"
+source = "git+https://github.com/Entropy1729/snarkVM.git?branch=wasm_transfer_function#6f9f5fa0c19dcfe5f17526e8dea18c65b1a22bd6"
 dependencies = [
  "snarkvm-circuit-environment",
  "snarkvm-circuit-types-boolean",
@@ -1977,7 +2044,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit-types-group"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git?branch=deploy_command#fa212e2879ef83f0c20237a16b2fd4e4b724da40"
+source = "git+https://github.com/Entropy1729/snarkVM.git?branch=wasm_transfer_function#6f9f5fa0c19dcfe5f17526e8dea18c65b1a22bd6"
 dependencies = [
  "snarkvm-circuit-environment",
  "snarkvm-circuit-types-boolean",
@@ -1989,7 +2056,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit-types-integers"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git?branch=deploy_command#fa212e2879ef83f0c20237a16b2fd4e4b724da40"
+source = "git+https://github.com/Entropy1729/snarkVM.git?branch=wasm_transfer_function#6f9f5fa0c19dcfe5f17526e8dea18c65b1a22bd6"
 dependencies = [
  "snarkvm-circuit-environment",
  "snarkvm-circuit-types-boolean",
@@ -2000,7 +2067,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit-types-scalar"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git?branch=deploy_command#fa212e2879ef83f0c20237a16b2fd4e4b724da40"
+source = "git+https://github.com/Entropy1729/snarkVM.git?branch=wasm_transfer_function#6f9f5fa0c19dcfe5f17526e8dea18c65b1a22bd6"
 dependencies = [
  "snarkvm-circuit-environment",
  "snarkvm-circuit-types-boolean",
@@ -2011,7 +2078,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit-types-string"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git?branch=deploy_command#fa212e2879ef83f0c20237a16b2fd4e4b724da40"
+source = "git+https://github.com/Entropy1729/snarkVM.git?branch=wasm_transfer_function#6f9f5fa0c19dcfe5f17526e8dea18c65b1a22bd6"
 dependencies = [
  "snarkvm-circuit-environment",
  "snarkvm-circuit-types-boolean",
@@ -2023,13 +2090,13 @@ dependencies = [
 [[package]]
 name = "snarkvm-compiler"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git?branch=deploy_command#fa212e2879ef83f0c20237a16b2fd4e4b724da40"
+source = "git+https://github.com/Entropy1729/snarkVM.git?branch=wasm_transfer_function#6f9f5fa0c19dcfe5f17526e8dea18c65b1a22bd6"
 dependencies = [
  "anyhow",
  "colored",
  "indexmap",
  "once_cell",
- "parking_lot",
+ "parking_lot 0.12.1",
  "paste",
  "rand",
  "rayon",
@@ -2049,7 +2116,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git?branch=deploy_command#fa212e2879ef83f0c20237a16b2fd4e4b724da40"
+source = "git+https://github.com/Entropy1729/snarkVM.git?branch=wasm_transfer_function#6f9f5fa0c19dcfe5f17526e8dea18c65b1a22bd6"
 dependencies = [
  "snarkvm-console-account",
  "snarkvm-console-algorithms",
@@ -2062,7 +2129,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console-account"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git?branch=deploy_command#fa212e2879ef83f0c20237a16b2fd4e4b724da40"
+source = "git+https://github.com/Entropy1729/snarkVM.git?branch=wasm_transfer_function#6f9f5fa0c19dcfe5f17526e8dea18c65b1a22bd6"
 dependencies = [
  "bs58",
  "snarkvm-console-network",
@@ -2072,7 +2139,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console-algorithms"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git?branch=deploy_command#fa212e2879ef83f0c20237a16b2fd4e4b724da40"
+source = "git+https://github.com/Entropy1729/snarkVM.git?branch=wasm_transfer_function#6f9f5fa0c19dcfe5f17526e8dea18c65b1a22bd6"
 dependencies = [
  "blake2s_simd",
  "smallvec",
@@ -2084,7 +2151,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console-collections"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git?branch=deploy_command#fa212e2879ef83f0c20237a16b2fd4e4b724da40"
+source = "git+https://github.com/Entropy1729/snarkVM.git?branch=wasm_transfer_function#6f9f5fa0c19dcfe5f17526e8dea18c65b1a22bd6"
 dependencies = [
  "aleo-std",
  "rayon",
@@ -2095,7 +2162,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console-network"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git?branch=deploy_command#fa212e2879ef83f0c20237a16b2fd4e4b724da40"
+source = "git+https://github.com/Entropy1729/snarkVM.git?branch=wasm_transfer_function#6f9f5fa0c19dcfe5f17526e8dea18c65b1a22bd6"
 dependencies = [
  "anyhow",
  "itertools",
@@ -2114,7 +2181,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console-network-environment"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git?branch=deploy_command#fa212e2879ef83f0c20237a16b2fd4e4b724da40"
+source = "git+https://github.com/Entropy1729/snarkVM.git?branch=wasm_transfer_function#6f9f5fa0c19dcfe5f17526e8dea18c65b1a22bd6"
 dependencies = [
  "anyhow",
  "bech32",
@@ -2131,7 +2198,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console-program"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git?branch=deploy_command#fa212e2879ef83f0c20237a16b2fd4e4b724da40"
+source = "git+https://github.com/Entropy1729/snarkVM.git?branch=wasm_transfer_function#6f9f5fa0c19dcfe5f17526e8dea18c65b1a22bd6"
 dependencies = [
  "enum_index",
  "enum_index_derive",
@@ -2148,7 +2215,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console-types"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git?branch=deploy_command#fa212e2879ef83f0c20237a16b2fd4e4b724da40"
+source = "git+https://github.com/Entropy1729/snarkVM.git?branch=wasm_transfer_function#6f9f5fa0c19dcfe5f17526e8dea18c65b1a22bd6"
 dependencies = [
  "snarkvm-console-network-environment",
  "snarkvm-console-types-address",
@@ -2163,7 +2230,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console-types-address"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git?branch=deploy_command#fa212e2879ef83f0c20237a16b2fd4e4b724da40"
+source = "git+https://github.com/Entropy1729/snarkVM.git?branch=wasm_transfer_function#6f9f5fa0c19dcfe5f17526e8dea18c65b1a22bd6"
 dependencies = [
  "snarkvm-console-network-environment",
  "snarkvm-console-types-boolean",
@@ -2174,7 +2241,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console-types-boolean"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git?branch=deploy_command#fa212e2879ef83f0c20237a16b2fd4e4b724da40"
+source = "git+https://github.com/Entropy1729/snarkVM.git?branch=wasm_transfer_function#6f9f5fa0c19dcfe5f17526e8dea18c65b1a22bd6"
 dependencies = [
  "snarkvm-console-network-environment",
 ]
@@ -2182,7 +2249,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console-types-field"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git?branch=deploy_command#fa212e2879ef83f0c20237a16b2fd4e4b724da40"
+source = "git+https://github.com/Entropy1729/snarkVM.git?branch=wasm_transfer_function#6f9f5fa0c19dcfe5f17526e8dea18c65b1a22bd6"
 dependencies = [
  "snarkvm-console-network-environment",
  "snarkvm-console-types-boolean",
@@ -2191,7 +2258,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console-types-group"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git?branch=deploy_command#fa212e2879ef83f0c20237a16b2fd4e4b724da40"
+source = "git+https://github.com/Entropy1729/snarkVM.git?branch=wasm_transfer_function#6f9f5fa0c19dcfe5f17526e8dea18c65b1a22bd6"
 dependencies = [
  "snarkvm-console-network-environment",
  "snarkvm-console-types-boolean",
@@ -2202,7 +2269,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console-types-integers"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git?branch=deploy_command#fa212e2879ef83f0c20237a16b2fd4e4b724da40"
+source = "git+https://github.com/Entropy1729/snarkVM.git?branch=wasm_transfer_function#6f9f5fa0c19dcfe5f17526e8dea18c65b1a22bd6"
 dependencies = [
  "snarkvm-console-network-environment",
  "snarkvm-console-types-boolean",
@@ -2212,7 +2279,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console-types-scalar"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git?branch=deploy_command#fa212e2879ef83f0c20237a16b2fd4e4b724da40"
+source = "git+https://github.com/Entropy1729/snarkVM.git?branch=wasm_transfer_function#6f9f5fa0c19dcfe5f17526e8dea18c65b1a22bd6"
 dependencies = [
  "snarkvm-console-network-environment",
  "snarkvm-console-types-boolean",
@@ -2222,7 +2289,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console-types-string"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git?branch=deploy_command#fa212e2879ef83f0c20237a16b2fd4e4b724da40"
+source = "git+https://github.com/Entropy1729/snarkVM.git?branch=wasm_transfer_function#6f9f5fa0c19dcfe5f17526e8dea18c65b1a22bd6"
 dependencies = [
  "snarkvm-console-network-environment",
  "snarkvm-console-types-boolean",
@@ -2233,7 +2300,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-curves"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git?branch=deploy_command#fa212e2879ef83f0c20237a16b2fd4e4b724da40"
+source = "git+https://github.com/Entropy1729/snarkVM.git?branch=wasm_transfer_function#6f9f5fa0c19dcfe5f17526e8dea18c65b1a22bd6"
 dependencies = [
  "rand",
  "rustc_version",
@@ -2246,7 +2313,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-fields"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git?branch=deploy_command#fa212e2879ef83f0c20237a16b2fd4e4b724da40"
+source = "git+https://github.com/Entropy1729/snarkVM.git?branch=wasm_transfer_function#6f9f5fa0c19dcfe5f17526e8dea18c65b1a22bd6"
 dependencies = [
  "aleo-std",
  "anyhow",
@@ -2263,7 +2330,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-parameters"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git?branch=deploy_command#fa212e2879ef83f0c20237a16b2fd4e4b724da40"
+source = "git+https://github.com/Entropy1729/snarkVM.git?branch=wasm_transfer_function#6f9f5fa0c19dcfe5f17526e8dea18c65b1a22bd6"
 dependencies = [
  "aleo-std",
  "anyhow",
@@ -2274,19 +2341,22 @@ dependencies = [
  "indexmap",
  "itertools",
  "lazy_static",
+ "parking_lot 0.11.2",
  "paste",
  "rand",
+ "reqwest",
  "serde_json",
  "sha2",
  "snarkvm-curves",
  "snarkvm-utilities",
  "thiserror",
+ "wasm-bindgen-futures",
 ]
 
 [[package]]
 name = "snarkvm-r1cs"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git?branch=deploy_command#fa212e2879ef83f0c20237a16b2fd4e4b724da40"
+source = "git+https://github.com/Entropy1729/snarkVM.git?branch=wasm_transfer_function#6f9f5fa0c19dcfe5f17526e8dea18c65b1a22bd6"
 dependencies = [
  "anyhow",
  "cfg-if",
@@ -2302,12 +2372,12 @@ dependencies = [
 [[package]]
 name = "snarkvm-rest"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git?branch=deploy_command#fa212e2879ef83f0c20237a16b2fd4e4b724da40"
+source = "git+https://github.com/Entropy1729/snarkVM.git?branch=wasm_transfer_function#6f9f5fa0c19dcfe5f17526e8dea18c65b1a22bd6"
 dependencies = [
  "anyhow",
  "http",
  "indexmap",
- "parking_lot",
+ "parking_lot 0.12.1",
  "rand",
  "serde",
  "serde_json",
@@ -2321,7 +2391,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-utilities"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git?branch=deploy_command#fa212e2879ef83f0c20237a16b2fd4e4b724da40"
+source = "git+https://github.com/Entropy1729/snarkVM.git?branch=wasm_transfer_function#6f9f5fa0c19dcfe5f17526e8dea18c65b1a22bd6"
 dependencies = [
  "aleo-std",
  "anyhow",
@@ -2339,7 +2409,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-utilities-derives"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git?branch=deploy_command#fa212e2879ef83f0c20237a16b2fd4e4b724da40"
+source = "git+https://github.com/Entropy1729/snarkVM.git?branch=wasm_transfer_function#6f9f5fa0c19dcfe5f17526e8dea18c65b1a22bd6"
 dependencies = [
  "proc-macro2 1.0.47",
  "quote 1.0.21",
@@ -2349,15 +2419,16 @@ dependencies = [
 [[package]]
 name = "snarkvm-wasm"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git?branch=deploy_command#fa212e2879ef83f0c20237a16b2fd4e4b724da40"
+source = "git+https://github.com/Entropy1729/snarkVM.git?branch=wasm_transfer_function#6f9f5fa0c19dcfe5f17526e8dea18c65b1a22bd6"
 dependencies = [
  "getrandom",
  "rand",
  "serde",
+ "snarkvm-circuit-network",
+ "snarkvm-compiler",
  "snarkvm-console",
  "snarkvm-curves",
  "snarkvm-fields",
- "snarkvm-r1cs",
  "snarkvm-utilities",
  "wasm-bindgen",
 ]
