@@ -60,23 +60,13 @@ impl Deploy {
             println!();
 
             // Print the transaction id.
-            println!(
-                "{}",
-                format_args!(
-                    "Transaction ID: {}",
-                    deployment_transaction.id().to_string().bright_green()
-                )
-            );
+            println!("{}", format_args!("Transaction ID: {}", deployment_transaction.id().to_string().bright_green()));
 
             // Prepare the path string.
             let path_string = format!("(in \"{}\")", path.display());
 
             // Log the deploy as successful.
-            Ok(format!(
-                "✅ Deployed '{}' {}",
-                package.program_id().to_string().bold(),
-                path_string.dimmed()
-            ))
+            Ok(format!("✅ Deployed '{}' {}", package.program_id().to_string().bold(), path_string.dimmed()))
         } else {
             bail!(
                 "⚠️ Could not deploy '{}' {}",
