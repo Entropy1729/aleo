@@ -15,7 +15,14 @@
 // along with the Aleo library. If not, see <https://www.gnu.org/licenses/>.
 
 use crate::account::{Address, Signature, ViewKey};
-use aleo_account::{CurrentNetwork, Environment, FromBytes, PrimeField, PrivateKey as PrivateKeyNative, ToBytes};
+use aleo_account::{
+    credits::CurrentNetwork,
+    Environment,
+    FromBytes,
+    PrimeField,
+    PrivateKey as PrivateKeyNative,
+    ToBytes,
+};
 
 use core::{convert::TryInto, fmt, ops::Deref, str::FromStr};
 use rand::{rngs::StdRng, SeedableRng};
