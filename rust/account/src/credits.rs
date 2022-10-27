@@ -14,13 +14,18 @@
 // You should have received a copy of the GNU General Public License
 // along with the Aleo library. If not, see <https://www.gnu.org/licenses/>.
 
-#![forbid(unsafe_code)]
+use snarkvm_wasm::{
+    network::Testnet3,
+    program::{Identifier as AleoIdentifier, ProgramID as AleoProgramID, Value as AleoValue},
+    AleoV0,
+    Process as AleoProcess,
+    Transaction as AleoTransaction,
+};
 
-pub mod account;
-pub use account::*;
-
-pub mod credits;
-pub use credits::*;
-
-#[cfg(test)]
-pub mod tests;
+pub type CurrentNetwork = Testnet3;
+pub type Process = AleoProcess<CurrentNetwork>;
+pub type ProgramID = AleoProgramID<CurrentNetwork>;
+pub type Identifier = AleoIdentifier<CurrentNetwork>;
+pub type Value = AleoValue<CurrentNetwork>;
+pub type Transaction = AleoTransaction<CurrentNetwork>;
+pub type Aleo = AleoV0;
