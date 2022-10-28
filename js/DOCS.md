@@ -1,8 +1,8 @@
-<img src="./public/aleo.svg" alt="drawing" width="120" style="padding-bottom: 5%"/>
+<img src="./public/aleo.svg" alt="drawing" width="60"/>
 
 # Aleo SDK
 
-A Software Development Kit (SDK) for Zero-Knowledge Transactions.
+#### A Software Development Kit (SDK) for Zero-Knowledge Transactions.
 
 This kit provides the following structures to work with:
 
@@ -10,7 +10,7 @@ This kit provides the following structures to work with:
 2. [View Key](https://developer.aleo.org/concepts/accounts#account-view-key)  
 3. [Record](https://developer.aleo.org/concepts/records)
 4. [Address](https://developer.aleo.org/concepts/accounts#account-address)
-5. Signature 
+5. [Signature]() 
 
 Happy hacking!
 
