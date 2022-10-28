@@ -22,6 +22,7 @@ use rand::{rngs::StdRng, SeedableRng};
 use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
+/// Class representing a Signature scheme of Aleo.
 pub struct Signature(SignatureNative);
 
 #[wasm_bindgen]

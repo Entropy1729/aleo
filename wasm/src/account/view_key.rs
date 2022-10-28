@@ -22,6 +22,7 @@ use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
 #[derive(Clone, Debug, PartialEq, Eq)]
+/// Class representing an Aleo View Key.
 pub struct ViewKey(ViewKeyNative);
 
 #[wasm_bindgen]
