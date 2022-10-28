@@ -6,11 +6,11 @@
 
 This kit provides the following structures to work with:
 
-1. [Private Key](/PrivateKey)
-2. [View Key](/ViewKey)
-3. [Record](/Record)
-4. [Address](/Address)
-5. [Signature](/Signature)
+1. [Private Key](aleo/PrivateKey.html)
+2. [View Key](aleo/ViewKey.html)
+3. [Record](aleo/Record.html)
+4. [Address](aleo/Address.html)
+5. [Signature](aleo/Signature.html)
 
 Happy hacking!
 
