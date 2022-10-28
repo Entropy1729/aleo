@@ -8,7 +8,7 @@
 
 ## Build Project
 
-To build all the necessary files and generate the `sdk.js` file with all the necessary code run:
+To build all the required files and generate the `sdk.js` file with the aleo sdk code run:
 
 `npm install`
 
