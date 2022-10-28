@@ -23,6 +23,7 @@ use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
 #[derive(Clone, Debug, PartialEq, Eq)]
+/// Class representing a private key.
 pub struct PrivateKey(PrivateKeyNative);
 
 #[wasm_bindgen]

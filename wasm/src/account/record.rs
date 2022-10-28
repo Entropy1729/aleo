@@ -21,6 +21,7 @@ use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
 #[derive(Clone, Debug, PartialEq, Eq)]
+/// Class representing an Aleo record.
 pub struct Record(RecordNative);
 
 #[wasm_bindgen]
