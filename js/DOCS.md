@@ -26,4 +26,4 @@ Happy hacking!
 
 [Aleo web](https://www.aleo.org/)
 
-You can visit the [SnarkVM repo](https://github.com/AleoHQ/snarkVM) repo and [SnarkOS repo](https://github.com/AleoHQ/snarkOS) to deep into the code of aleo infrastructure
+You can visit the [SnarkVM repo](https://github.com/AleoHQ/snarkVM) and [SnarkOS repo](https://github.com/AleoHQ/snarkOS) to go deep into the code of aleo infrastructure
