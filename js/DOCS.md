@@ -6,15 +6,11 @@ A Software Development Kit (SDK) for Zero-Knowledge Transactions.
 
 This kit provides the following structures to work with:
 
-- [Private Key](https://developer.aleo.org/concepts/accounts#account-private-key)
-
-- [View Key](https://developer.aleo.org/concepts/accounts#account-view-key)
-  
-- [Record](https://developer.aleo.org/concepts/records)
-  
-- [Address](https://developer.aleo.org/concepts/accounts#account-address)
-
-- Signature 
+1. [Private Key](https://developer.aleo.org/concepts/accounts#account-private-key)
+2. [View Key](https://developer.aleo.org/concepts/accounts#account-view-key)  
+3. [Record](https://developer.aleo.org/concepts/records)
+4. [Address](https://developer.aleo.org/concepts/accounts#account-address)
+5. Signature 
 
 Happy hacking!
 
