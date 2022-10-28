@@ -26,23 +26,47 @@ pub struct ViewKey(ViewKeyNative);
 
 #[wasm_bindgen]
 impl ViewKey {
+    /// Create a view key from a private key.
+    /// @example
+    /// let private_key = new PrivateKey();
+    /// let view_key = PrivateKey.from_private_key(private_key)
     pub fn from_private_key(private_key: &PrivateKey) -> Self {
         Self(ViewKeyNative::try_from(**private_key).unwrap())
     }
 
+    /// Create a view key from a string.
+    /// @throw Will throw an error if the view key is not valid.
+    /// @example
+    /// let view_key = ViewKey.from_string("AViewKey1...");
     pub fn from_string(view_key: &str) -> Self {
         Self::from_str(view_key).unwrap()
     }
 
+    /// Create a view key from a string.
+    /// @throw Will throw an error if the view key is not valid.
+    /// @example
+    /// let view_key = ViewKey.from_string("AViewKey1...");
+    /// view_key.to_string(); // "AViewKey1..."
     #[allow(clippy::inherent_to_string_shadow_display)]
     pub fn to_string(&self) -> String {
         self.0.to_string()
     }
 
+    /// Get the address derivated from the view key.
+    /// @example
+    /// let view_key = ViewKey.from_string("AViewKey1...");
+    /// view_key.to_address(); // "aleo1..."
     pub fn to_address(&self) -> Address {
         Address::from_view_key(self)
     }
 
+    /// Decrypt a ciphertext (encrypted record) with the view key.
+    /// @throws Will throw an error if the record does not belong to this view key.
+    /// @example
+    /// let view_key = ViewKey.from_string("AViewKey1...");
+    /// let ciphertext = "record1...";
+    /// let plaintext = view_key.decrypt(ciphertext);
+    /// plaintext.to_string(); // "{ owner: aleo1d5hg2z3ma00382pngntdp68e74zv54jdxy249qhaujhks9c72yrs33ddah.private, gates: 99u64.public, _nonce: 0group.public }"
     pub fn decrypt(&self, ciphertext: &str) -> Result<Record, String> {
         let ciphertext = Ciphertext::from_str(ciphertext).map_err(|error| error.to_string())?;
         match ciphertext.decrypt(&self.0) {

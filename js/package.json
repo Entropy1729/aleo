@@ -6,9 +6,12 @@
   "license": "GPL-3.0",
   "scripts": {
     "preinstall": "cd ../wasm && wasm-pack build --out-dir ../js/aleo-wasm --target nodejs",
+    "generate_docs": "jsdoc --configure jsdoc.json --verbose",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "aleo-wasm": "file:./aleo-wasm"
+    "aleo-wasm": "file:./aleo-wasm",
+    "jsdoc": "3.6.11",
+    "clean-jsdoc-theme": "4.1.8"
   }
 }
