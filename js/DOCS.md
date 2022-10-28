@@ -6,15 +6,17 @@
 
 This kit provides the following structures to work with:
 
-1. [Private Key](https://developer.aleo.org/concepts/accounts#account-private-key)
-2. [View Key](https://developer.aleo.org/concepts/accounts#account-view-key)  
-3. [Record](https://developer.aleo.org/concepts/records)
-4. [Address](https://developer.aleo.org/concepts/accounts#account-address)
-5. [Signature]() 
+1. [Private Key](/PrivateKey)
+2. [View Key](/ViewKey)
+3. [Record](/Record)
+4. [Address](/Address)
+5. [Signature](/Signature)
 
 Happy hacking!
 
-## Extra Aleo Tools 
+## More on Aleo  
+
+[Aleo Concepts](https://developer.aleo.org/overview#chapter-1-concepts)
 
 [Aleo SDK account generator](https://aleohq.github.io/aleo/)
 
@@ -22,4 +24,4 @@ Happy hacking!
 
 [Aleo web](https://www.aleo.org/)
 
-You can visit the [SnarkVM repo](https://github.com/AleoHQ/snarkVM) and [SnarkOS repo](https://github.com/AleoHQ/snarkOS) to go deep into the code of aleo infrastructure
+You can visit the [SnarkVM repo](https://github.com/AleoHQ/snarkVM) and [SnarkOS repo](https://github.com/AleoHQ/snarkOS) to go deep into the code of Aleo infrastructure
