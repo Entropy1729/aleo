@@ -18,9 +18,6 @@ harness = false
 
 [dependencies.snarkvm-wasm]
 git = "https://github.com/Entropy1729/snarkVM.git"
-branch = "deploy_command"
-# git = "https://github.com/AleoHQ/snarkVM.git"
-# rev = "4045a57"
 features = ["parallel"]
 
 [dev-dependencies.rand]

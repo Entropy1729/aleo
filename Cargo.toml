@@ -62,10 +62,7 @@ version = "1"
 version = "1"
 
 [dependencies.snarkvm]
-# path = "../snarkVM_entropy"
 git = "https://github.com/Entropy1729/snarkVM.git"
-branch = "deploy_command"
-# rev = "69cf3bd"
 features = ["aleo-cli", "circuit", "console", "parallel", "rest"]
 
 [dependencies.thiserror]
