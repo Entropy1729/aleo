@@ -4,6 +4,8 @@
 
 #### A Software Development Kit (SDK) for Zero-Knowledge Transactions.
 
+Aleo [SnarkVM](https://github.com/AleoHQ/snarkVM) low-level utilities in web assembly. Built in rust and wasm-pack.
+
 This kit provides the following structures to work with:
 
 1. [Private Key](./PrivateKey.html)
