@@ -5,7 +5,7 @@
   "main": "src/core.js",
   "license": "GPL-3.0",
   "scripts": {
-    "preinstall": "cd ../wasm && wasm-pack build --out-dir ../js/aleo-wasm --target nodejs",
+    "preinstall": "cd ../wasm && wasm-pack build --out-dir ../js/aleo-wasm --target web --scope entropy-1729",
     "generate_docs": "jsdoc --configure jsdoc.json --verbose",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

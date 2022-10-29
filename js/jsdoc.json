@@ -13,8 +13,7 @@
         "theme_opts": {
             "default_theme": "dark",
             "static_dir": ["./public"],
-            "favicon": "./public/aleo.svg",
-            "homepageTitle": "Aleo SDK"
+            "favicon": "./public/aleo.svg"
         }
     },
     "markdown": {
