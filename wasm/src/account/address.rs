@@ -28,46 +28,27 @@ pub struct Address(AddressNative);
 #[wasm_bindgen]
 impl Address {
     /// Create an address from a private key
-    /// @example
-    /// let private_key = new PrivateKey();
-    /// let address =  Address.from_private_key(private_key);
     pub fn from_private_key(private_key: &PrivateKey) -> Self {
         Self(AddressNative::try_from(**private_key).unwrap())
     }
 
     /// Create an address from a view key
-    /// @example
-    /// let view_key = ViewKey.from_string("AViewKey1...");
-    /// let address =  Address.from_view_key(view_key);
     pub fn from_view_key(view_key: &ViewKey) -> Self {
         Self(AddressNative::try_from(**view_key).unwrap())
     }
 
     /// Create an address from a string
-    /// @throws Will throw an error if the address is not valid
-    /// @example
-    /// let address = Address.from_string("aleo1...");
     pub fn from_string(address: &str) -> Self {
         Self::from_str(address).unwrap()
     }
 
     /// Cast an address to a string
-    /// @example
-    /// let private_key = new PrivateKey();
-    /// let address =  Address.from_private_key(private_key);
-    /// address.to_string(); // "aleo1..."
     #[allow(clippy::inherent_to_string_shadow_display)]
     pub fn to_string(&self) -> String {
         self.0.to_string()
     }
 
     /// Verify that the signature for a message belongs to the address
-    /// @example
-    /// let private_key = new PrivateKey();
-    /// let signature = Signature.from_string("sign...");
-    /// let address = private_key.to_address();
-    /// signature.sign(address, "random message");
-    /// address.verify("random message", signature) // true
     pub fn verify(&self, message: &[u8], signature: &Signature) -> bool {
         signature.verify(self, message)
     }

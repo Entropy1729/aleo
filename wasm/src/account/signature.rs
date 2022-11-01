@@ -28,33 +28,21 @@ pub struct Signature(SignatureNative);
 #[wasm_bindgen]
 impl Signature {
     /// Sign a message with a private key
-    /// @example
-    /// let private_key = new PrivateKey();
-    /// let signature = Signature.sign(private_key, "random message");
     pub fn sign(private_key: &PrivateKey, message: &[u8]) -> Self {
         Self(SignatureNative::sign_bytes(private_key, message, &mut StdRng::from_entropy()).unwrap())
     }
 
     /// Verify that the signature for a message belongs to the address
-    /// @example
-    /// let private_key = new PrivateKey();
-    /// let signature = Signature.sign(private_key, "random message");
-    /// signature.verify(private_key.to_address(), "random message"); // true
     pub fn verify(&self, address: &Address, message: &[u8]) -> bool {
         self.0.verify_bytes(address, message)
     }
 
     /// Create a signature from a string
-    /// @example
-    /// let signature = Signature.from_string("sign...");
     pub fn from_string(signature: &str) -> Self {
         Self::from_str(signature).unwrap()
     }
 
     /// Cast the signature to a string
-    /// @example
-    /// let signature = Signature.from_string("sign...");
-    /// signature.to_string() // "sign..."
     #[allow(clippy::inherent_to_string_shadow_display)]
     pub fn to_string(&self) -> String {
         self.0.to_string()
