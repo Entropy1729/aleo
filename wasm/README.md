@@ -12,34 +12,27 @@ Concepts](https://developer.aleo.org/overview/#chapter-1-concepts)
 
 ## Features
   - [Private Key](#private-key)
-    - [Examples](#examples)
-        - [Creating a private key](#creating-a-private-key)
-        - [Signing a message](#signing-a-message)
-        - [Getting account info from private key](#getting-account-info-from-private-key)
-        - [Get private key string](#get-private-key-string)
+    - [Creating a private key](#creating-a-private-key)
+    - [Signing a message](#signing-a-message)
+    - [Getting account info from private key](#getting-account-info-from-private-key)
+    - [Get private key string](#get-private-key-string)
   - [View Key](#view-key)
-    - [Examples](#example)
-        - [Creating a View Key](#creating-a-view-key)
-        - [Decrypting records](#decrypting-records)
-        - [Getting account info from view key](#getting-account-info-from-view-key)
-        - [Getting view key string](#getting-view-key-string)
+    - [Creating a View Key](#creating-a-view-key)
+    - [Decrypting records](#decrypting-records)
+    - [Getting account info from view key](#getting-account-info-from-view-key)
+    - [Getting view key string](#getting-view-key-string)
   - [Record](#record)
-    - [Examples](#example-1)
-        - [Getting a record string](#getting-a-record-string)
-        - [Getting the record balance](#getting-the-record-balance)
+    - [Getting a record string](#getting-a-record-string)
+    - [Getting the record balance](#getting-the-record-balance)
   - [Address](#address)
-    - [Examples](#example-2)
-        - [Creating the address](#creating-the-address)
-        - [Verifying signatures](#verifying-signatures)
-        - [Getting address string](#getting-address-string)
+    - [Creating the address](#creating-the-address)
+    - [Verifying signatures](#verifying-signatures)
+    - [Getting address string](#getting-address-string)
   - [Signature](#signature)
-    - [Examples](#example-3)
-        - [Creating a Signature](#creating-a-signature)
-        - [Verify signatures](#verify-signatures)
+    - [Creating a Signature](#creating-a-signature)
+    - [Verify signatures](#verify-signatures)
 
 ## Private Key
-
-### Examples
 
 ##### Creating a private key
 
@@ -100,8 +93,6 @@ private_key.to_string(); // "APrivateKey1..."
 
 ## View Key
 
-### Examples
-
 ##### Creating a View Key
 
 You can create a view key in two different ways. The first is using a
@@ -153,8 +144,6 @@ view_key.to_string(); // "AViewKey1..."
 
 ## Record
 
-### Examples
-
 ##### Getting a record string
 
 To get the string representation of the record you can use the `to_string` method. We can use the previous example of the decryption using the view Key
@@ -175,8 +164,6 @@ let gates = record.gates(); // "99u64.public"
 ```
 
 ## Address
-
-### Examples
 
 ##### Creating the address
 
@@ -228,8 +215,6 @@ address.to_string(); // "aleo1..."
 ```
 
 ## Signature
-
-### Examples
 
 ##### Creating a Signature
 
