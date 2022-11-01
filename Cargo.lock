@@ -1769,7 +1769,7 @@ checksum = "a507befe795404456341dfab10cef66ead4c041f62b8b11bbb92bffe5d0953e0"
 [[package]]
 name = "snarkvm"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git#2c4e282df46ed71c809fd4b49738fd78562354ac"
+source = "git+https://github.com/Entropy1729/snarkVM.git#dce9afde31341f382423ee41991dea748d8ad086"
 dependencies = [
  "anyhow",
  "clap",
@@ -1797,7 +1797,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-algorithms"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git#2c4e282df46ed71c809fd4b49738fd78562354ac"
+source = "git+https://github.com/Entropy1729/snarkVM.git#dce9afde31341f382423ee41991dea748d8ad086"
 dependencies = [
  "aleo-std",
  "anyhow",
@@ -1823,7 +1823,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git#2c4e282df46ed71c809fd4b49738fd78562354ac"
+source = "git+https://github.com/Entropy1729/snarkVM.git#dce9afde31341f382423ee41991dea748d8ad086"
 dependencies = [
  "snarkvm-circuit-account",
  "snarkvm-circuit-algorithms",
@@ -1837,7 +1837,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit-account"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git#2c4e282df46ed71c809fd4b49738fd78562354ac"
+source = "git+https://github.com/Entropy1729/snarkVM.git#dce9afde31341f382423ee41991dea748d8ad086"
 dependencies = [
  "snarkvm-circuit-algorithms",
  "snarkvm-circuit-network",
@@ -1848,7 +1848,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit-algorithms"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git#2c4e282df46ed71c809fd4b49738fd78562354ac"
+source = "git+https://github.com/Entropy1729/snarkVM.git#dce9afde31341f382423ee41991dea748d8ad086"
 dependencies = [
  "snarkvm-circuit-types",
  "snarkvm-console-algorithms",
@@ -1858,7 +1858,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit-collections"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git#2c4e282df46ed71c809fd4b49738fd78562354ac"
+source = "git+https://github.com/Entropy1729/snarkVM.git#dce9afde31341f382423ee41991dea748d8ad086"
 dependencies = [
  "snarkvm-circuit-algorithms",
  "snarkvm-circuit-types",
@@ -1868,7 +1868,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit-environment"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git#2c4e282df46ed71c809fd4b49738fd78562354ac"
+source = "git+https://github.com/Entropy1729/snarkVM.git#dce9afde31341f382423ee41991dea748d8ad086"
 dependencies = [
  "indexmap",
  "itertools",
@@ -1886,12 +1886,12 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit-environment-witness"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git#2c4e282df46ed71c809fd4b49738fd78562354ac"
+source = "git+https://github.com/Entropy1729/snarkVM.git#dce9afde31341f382423ee41991dea748d8ad086"
 
 [[package]]
 name = "snarkvm-circuit-network"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git#2c4e282df46ed71c809fd4b49738fd78562354ac"
+source = "git+https://github.com/Entropy1729/snarkVM.git#dce9afde31341f382423ee41991dea748d8ad086"
 dependencies = [
  "snarkvm-circuit-algorithms",
  "snarkvm-circuit-collections",
@@ -1902,7 +1902,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit-program"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git#2c4e282df46ed71c809fd4b49738fd78562354ac"
+source = "git+https://github.com/Entropy1729/snarkVM.git#dce9afde31341f382423ee41991dea748d8ad086"
 dependencies = [
  "snarkvm-circuit-account",
  "snarkvm-circuit-network",
@@ -1914,7 +1914,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit-types"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git#2c4e282df46ed71c809fd4b49738fd78562354ac"
+source = "git+https://github.com/Entropy1729/snarkVM.git#dce9afde31341f382423ee41991dea748d8ad086"
 dependencies = [
  "snarkvm-circuit-environment",
  "snarkvm-circuit-types-address",
@@ -1929,7 +1929,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit-types-address"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git#2c4e282df46ed71c809fd4b49738fd78562354ac"
+source = "git+https://github.com/Entropy1729/snarkVM.git#dce9afde31341f382423ee41991dea748d8ad086"
 dependencies = [
  "snarkvm-circuit-environment",
  "snarkvm-circuit-types-boolean",
@@ -1942,7 +1942,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit-types-boolean"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git#2c4e282df46ed71c809fd4b49738fd78562354ac"
+source = "git+https://github.com/Entropy1729/snarkVM.git#dce9afde31341f382423ee41991dea748d8ad086"
 dependencies = [
  "snarkvm-circuit-environment",
  "snarkvm-console-types-boolean",
@@ -1951,7 +1951,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit-types-field"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git#2c4e282df46ed71c809fd4b49738fd78562354ac"
+source = "git+https://github.com/Entropy1729/snarkVM.git#dce9afde31341f382423ee41991dea748d8ad086"
 dependencies = [
  "snarkvm-circuit-environment",
  "snarkvm-circuit-types-boolean",
@@ -1961,7 +1961,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit-types-group"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git#2c4e282df46ed71c809fd4b49738fd78562354ac"
+source = "git+https://github.com/Entropy1729/snarkVM.git#dce9afde31341f382423ee41991dea748d8ad086"
 dependencies = [
  "snarkvm-circuit-environment",
  "snarkvm-circuit-types-boolean",
@@ -1973,7 +1973,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit-types-integers"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git#2c4e282df46ed71c809fd4b49738fd78562354ac"
+source = "git+https://github.com/Entropy1729/snarkVM.git#dce9afde31341f382423ee41991dea748d8ad086"
 dependencies = [
  "snarkvm-circuit-environment",
  "snarkvm-circuit-types-boolean",
@@ -1984,7 +1984,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit-types-scalar"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git#2c4e282df46ed71c809fd4b49738fd78562354ac"
+source = "git+https://github.com/Entropy1729/snarkVM.git#dce9afde31341f382423ee41991dea748d8ad086"
 dependencies = [
  "snarkvm-circuit-environment",
  "snarkvm-circuit-types-boolean",
@@ -1995,7 +1995,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit-types-string"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git#2c4e282df46ed71c809fd4b49738fd78562354ac"
+source = "git+https://github.com/Entropy1729/snarkVM.git#dce9afde31341f382423ee41991dea748d8ad086"
 dependencies = [
  "snarkvm-circuit-environment",
  "snarkvm-circuit-types-boolean",
@@ -2007,7 +2007,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-compiler"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git#2c4e282df46ed71c809fd4b49738fd78562354ac"
+source = "git+https://github.com/Entropy1729/snarkVM.git#dce9afde31341f382423ee41991dea748d8ad086"
 dependencies = [
  "anyhow",
  "colored",
@@ -2033,7 +2033,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git#2c4e282df46ed71c809fd4b49738fd78562354ac"
+source = "git+https://github.com/Entropy1729/snarkVM.git#dce9afde31341f382423ee41991dea748d8ad086"
 dependencies = [
  "snarkvm-console-account",
  "snarkvm-console-algorithms",
@@ -2046,7 +2046,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console-account"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git#2c4e282df46ed71c809fd4b49738fd78562354ac"
+source = "git+https://github.com/Entropy1729/snarkVM.git#dce9afde31341f382423ee41991dea748d8ad086"
 dependencies = [
  "bs58",
  "snarkvm-console-network",
@@ -2056,7 +2056,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console-algorithms"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git#2c4e282df46ed71c809fd4b49738fd78562354ac"
+source = "git+https://github.com/Entropy1729/snarkVM.git#dce9afde31341f382423ee41991dea748d8ad086"
 dependencies = [
  "blake2s_simd",
  "smallvec",
@@ -2068,7 +2068,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console-collections"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git#2c4e282df46ed71c809fd4b49738fd78562354ac"
+source = "git+https://github.com/Entropy1729/snarkVM.git#dce9afde31341f382423ee41991dea748d8ad086"
 dependencies = [
  "aleo-std",
  "rayon",
@@ -2079,7 +2079,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console-network"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git#2c4e282df46ed71c809fd4b49738fd78562354ac"
+source = "git+https://github.com/Entropy1729/snarkVM.git#dce9afde31341f382423ee41991dea748d8ad086"
 dependencies = [
  "anyhow",
  "itertools",
@@ -2098,7 +2098,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console-network-environment"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git#2c4e282df46ed71c809fd4b49738fd78562354ac"
+source = "git+https://github.com/Entropy1729/snarkVM.git#dce9afde31341f382423ee41991dea748d8ad086"
 dependencies = [
  "anyhow",
  "bech32",
@@ -2115,7 +2115,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console-program"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git#2c4e282df46ed71c809fd4b49738fd78562354ac"
+source = "git+https://github.com/Entropy1729/snarkVM.git#dce9afde31341f382423ee41991dea748d8ad086"
 dependencies = [
  "enum_index",
  "enum_index_derive",
@@ -2132,7 +2132,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console-types"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git#2c4e282df46ed71c809fd4b49738fd78562354ac"
+source = "git+https://github.com/Entropy1729/snarkVM.git#dce9afde31341f382423ee41991dea748d8ad086"
 dependencies = [
  "snarkvm-console-network-environment",
  "snarkvm-console-types-address",
@@ -2147,7 +2147,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console-types-address"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git#2c4e282df46ed71c809fd4b49738fd78562354ac"
+source = "git+https://github.com/Entropy1729/snarkVM.git#dce9afde31341f382423ee41991dea748d8ad086"
 dependencies = [
  "snarkvm-console-network-environment",
  "snarkvm-console-types-boolean",
@@ -2158,7 +2158,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console-types-boolean"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git#2c4e282df46ed71c809fd4b49738fd78562354ac"
+source = "git+https://github.com/Entropy1729/snarkVM.git#dce9afde31341f382423ee41991dea748d8ad086"
 dependencies = [
  "snarkvm-console-network-environment",
 ]
@@ -2166,7 +2166,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console-types-field"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git#2c4e282df46ed71c809fd4b49738fd78562354ac"
+source = "git+https://github.com/Entropy1729/snarkVM.git#dce9afde31341f382423ee41991dea748d8ad086"
 dependencies = [
  "snarkvm-console-network-environment",
  "snarkvm-console-types-boolean",
@@ -2175,7 +2175,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console-types-group"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git#2c4e282df46ed71c809fd4b49738fd78562354ac"
+source = "git+https://github.com/Entropy1729/snarkVM.git#dce9afde31341f382423ee41991dea748d8ad086"
 dependencies = [
  "snarkvm-console-network-environment",
  "snarkvm-console-types-boolean",
@@ -2186,7 +2186,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console-types-integers"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git#2c4e282df46ed71c809fd4b49738fd78562354ac"
+source = "git+https://github.com/Entropy1729/snarkVM.git#dce9afde31341f382423ee41991dea748d8ad086"
 dependencies = [
  "snarkvm-console-network-environment",
  "snarkvm-console-types-boolean",
@@ -2196,7 +2196,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console-types-scalar"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git#2c4e282df46ed71c809fd4b49738fd78562354ac"
+source = "git+https://github.com/Entropy1729/snarkVM.git#dce9afde31341f382423ee41991dea748d8ad086"
 dependencies = [
  "snarkvm-console-network-environment",
  "snarkvm-console-types-boolean",
@@ -2206,7 +2206,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console-types-string"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git#2c4e282df46ed71c809fd4b49738fd78562354ac"
+source = "git+https://github.com/Entropy1729/snarkVM.git#dce9afde31341f382423ee41991dea748d8ad086"
 dependencies = [
  "snarkvm-console-network-environment",
  "snarkvm-console-types-boolean",
@@ -2217,7 +2217,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-curves"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git#2c4e282df46ed71c809fd4b49738fd78562354ac"
+source = "git+https://github.com/Entropy1729/snarkVM.git#dce9afde31341f382423ee41991dea748d8ad086"
 dependencies = [
  "rand",
  "rustc_version",
@@ -2230,7 +2230,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-fields"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git#2c4e282df46ed71c809fd4b49738fd78562354ac"
+source = "git+https://github.com/Entropy1729/snarkVM.git#dce9afde31341f382423ee41991dea748d8ad086"
 dependencies = [
  "aleo-std",
  "anyhow",
@@ -2247,7 +2247,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-parameters"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git#2c4e282df46ed71c809fd4b49738fd78562354ac"
+source = "git+https://github.com/Entropy1729/snarkVM.git#dce9afde31341f382423ee41991dea748d8ad086"
 dependencies = [
  "aleo-std",
  "anyhow",
@@ -2270,7 +2270,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-r1cs"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git#2c4e282df46ed71c809fd4b49738fd78562354ac"
+source = "git+https://github.com/Entropy1729/snarkVM.git#dce9afde31341f382423ee41991dea748d8ad086"
 dependencies = [
  "anyhow",
  "cfg-if",
@@ -2286,7 +2286,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-rest"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git#2c4e282df46ed71c809fd4b49738fd78562354ac"
+source = "git+https://github.com/Entropy1729/snarkVM.git#dce9afde31341f382423ee41991dea748d8ad086"
 dependencies = [
  "anyhow",
  "http",
@@ -2305,7 +2305,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-utilities"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git#2c4e282df46ed71c809fd4b49738fd78562354ac"
+source = "git+https://github.com/Entropy1729/snarkVM.git#dce9afde31341f382423ee41991dea748d8ad086"
 dependencies = [
  "aleo-std",
  "anyhow",
@@ -2323,7 +2323,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-utilities-derives"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git#2c4e282df46ed71c809fd4b49738fd78562354ac"
+source = "git+https://github.com/Entropy1729/snarkVM.git#dce9afde31341f382423ee41991dea748d8ad086"
 dependencies = [
  "proc-macro2 1.0.47",
  "quote 1.0.21",
@@ -2333,7 +2333,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-wasm"
 version = "0.9.0"
-source = "git+https://github.com/Entropy1729/snarkVM.git#2c4e282df46ed71c809fd4b49738fd78562354ac"
+source = "git+https://github.com/Entropy1729/snarkVM.git#dce9afde31341f382423ee41991dea748d8ad086"
 dependencies = [
  "getrandom",
  "rand",

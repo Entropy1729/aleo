@@ -14,26 +14,31 @@
 // You should have received a copy of the GNU General Public License
 // along with the Aleo library. If not, see <https://www.gnu.org/licenses/>.
 
-pub mod address;
-pub use address::*;
+use std::str::FromStr;
 
-pub mod private_key;
-pub use private_key::*;
+use aleo_account::Block as BlockNative;
+use wasm_bindgen::prelude::*;
 
-pub mod signature;
-pub use signature::*;
+#[wasm_bindgen]
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct Block(BlockNative);
 
-pub mod view_key;
-pub use view_key::*;
+#[wasm_bindgen]
+impl Block {
+    pub fn from_string(block: &str) -> Self {
+        Self::from_str(block).unwrap()
+    }
 
-pub mod record;
-pub use record::*;
+    #[allow(clippy::inherent_to_string_shadow_display)]
+    pub fn to_string(&self) -> String {
+        self.0.to_string()
+    }
+}
 
-pub mod block;
-pub use block::*;
+impl FromStr for Block {
+    type Err = anyhow::Error;
 
-pub mod transaction;
-pub use transaction::*;
-
-pub mod ciphertext;
-pub use ciphertext::*;
+    fn from_str(block: &str) -> Result<Self, Self::Err> {
+        Ok(Self(BlockNative::from_str(block)?))
+    }
+}

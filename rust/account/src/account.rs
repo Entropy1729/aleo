@@ -25,6 +25,8 @@ use snarkvm_wasm::{
     program::{Ciphertext as AleoCiphertext, Plaintext as AleoPlaintext, Record as AleoRecord},
 };
 
+pub use snarkvm_wasm::{Block as AleoBlock, Transaction as AleoTransaction, Transactions as AleoTransactions};
+
 pub use snarkvm_wasm::{network::Environment, FromBytes, PrimeField, ToBytes};
 
 pub type CurrentNetwork = Testnet3;
@@ -36,3 +38,6 @@ pub type ViewKey = AleoViewKey<CurrentNetwork>;
 
 pub type Record = AleoRecord<CurrentNetwork, AleoPlaintext<CurrentNetwork>>;
 pub type Ciphertext = AleoRecord<CurrentNetwork, AleoCiphertext<CurrentNetwork>>;
+pub type Block = AleoBlock<CurrentNetwork>;
+pub type Transaction = AleoTransaction<CurrentNetwork>;
+pub type Transactions = AleoTransactions<CurrentNetwork>;
