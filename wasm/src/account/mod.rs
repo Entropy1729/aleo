@@ -28,3 +28,12 @@ pub use view_key::*;
 
 pub mod record;
 pub use record::*;
+
+pub mod block;
+pub use block::*;
+
+pub mod transaction;
+pub use transaction::*;
+
+pub mod ciphertext;
+pub use ciphertext::*;
