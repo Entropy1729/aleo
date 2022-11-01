@@ -241,7 +241,7 @@ signed a certain message
 let private_key = new PrivateKey();
 let signature = Signature.sign(private_key, "random message");
 let address = private_key.to_address();
-signature.verify(priaddress, "random message"); // true
+signature.verify(address, "random message"); // true
 ```
 
 
