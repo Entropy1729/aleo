@@ -17,8 +17,7 @@ path = "benches/account.rs"
 harness = false
 
 [dependencies.snarkvm-wasm]
-git = "https://github.com/AleoHQ/snarkVM.git"
-rev = "4045a57"
+git = "https://github.com/Entropy1729/snarkVM.git"
 features = ["parallel"]
 
 [dev-dependencies.rand]
