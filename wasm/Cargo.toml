@@ -1,15 +1,15 @@
 [package]
-name = "sdk"
-version = "0.3.1"
-authors = ["The Aleo Team <hello@aleo.org>"]
+name = "aleo-sdk"
+version = "0.3.2"
+authors = ["The Aleo Team <hello@aleo.org>", "The Entropy1729 Team <hello@entropy1729.com>"]
 description = "Aleo"
 homepage = "https://aleo.org"
-repository = "https://github.com/AleoHQ/aleo"
+repository = "https://github.com/Entropy1729/aleo"
 keywords = ["aleo", "cryptography", "blockchain", "decentralized", "zero-knowledge"]
 categories = ["cryptography::cryptocurrencies", "operating-systems"]
 include = ["Cargo.toml", "src", "README.md", "LICENSE.md"]
 license = "GPL-3.0"
-edition = "2018"
+edition = "2021"
 
 [lib]
 crate-type = ["cdylib", "rlib"]

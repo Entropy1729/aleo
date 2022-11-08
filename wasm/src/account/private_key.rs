@@ -36,9 +36,6 @@ impl PrivateKey {
     }
 
     /// Create a private key from a seed phrase 32 bytes long.
-    /// @throw Will throw an error if the seed is not valid.
-    /// @example
-    /// let private_key = PrivateKey.from_seed_unchecked("seed...");
     pub fn from_seed_unchecked(seed: &[u8]) -> Self {
         console_error_panic_hook::set_once();
         // Cast into a fixed-size byte array. Note: This is a **hard** requirement for security.
@@ -50,42 +47,27 @@ impl PrivateKey {
     }
 
     /// Create a private key from a string.
-    /// @throw Will throw an error if the private key is not valid.
-    /// @example
-    /// let private_key = PrivateKey.from_string("APrivateKey1...");
     pub fn from_string(private_key: &str) -> Self {
         Self::from_str(private_key).unwrap()
     }
 
     /// Cast a private key to a string
-    /// @example
-    /// let private_key = new PrivateKey();
-    /// private_key.to_string(); // "APrivateKey1..."
     #[allow(clippy::inherent_to_string_shadow_display)]
     pub fn to_string(&self) -> String {
         self.0.to_string()
     }
 
     /// Get the view key derived from the private key
-    /// @example
-    /// let private_key = new PrivateKey();
-    /// let view_key = private_key.to_view_key();
     pub fn to_view_key(&self) -> ViewKey {
         ViewKey::from_private_key(self)
     }
 
     /// Get the address derived from the private key
-    /// @example
-    /// let private_key = new PrivateKey();
-    /// let address = private_key.to_address();
     pub fn to_address(&self) -> Address {
         Address::from_private_key(self)
     }
 
     /// Sign a message with the private key
-    /// @example
-    /// let private_key = new PrivateKey();
-    /// let signature = private_key.sign("a random message");
     pub fn sign(&self, message: &[u8]) -> Signature {
         Signature::sign(self, message)
     }
